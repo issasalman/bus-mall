@@ -1,13 +1,13 @@
 'use strict';
 
-let maxTries=10;
+let maxTries=25;
 let userCounter=0;
 
 let leftImageIndex;
 let middleImageIndex;
 let rightImageIndex;
 
-
+// this.src= `images/${name}`;
 
 function Item(name,src) {
   this.name= name;
@@ -18,7 +18,8 @@ function Item(name,src) {
   Item.all.push(this);
 
 }
- Item.all=[];
+Item.all=[];
+
 new Item('bag.jpg','images/bag.jpg');
 new Item('banana.jpg','images/banana.jpg');
 new Item('bathroom.jpg','images/bathroom.jpg');
@@ -39,14 +40,18 @@ new Item('unicorn.jpg','images/unicorn.jpg');
 new Item('water-can.jpg','images/water-can.jpg');
 new Item('wine-glass.jpg','images/wine-glass.jpg');
 
-let leftImageElement=document.getElementById('left-img');
-let middleImageElement=document.getElementById('middle-img');
-let rightImageElement=document.getElementById('right-img');
 
 function getRandomIndex() {
 
   return Math.floor(Math.random() * Item.all.length);
+
+  
 }
+let leftImageElement=document.getElementById('left-img');
+let middleImageElement=document.getElementById('middle-img');
+let rightImageElement=document.getElementById('right-img');
+
+
 
 function renderImages() {
 
@@ -111,13 +116,13 @@ function userClick(event) {
 
 
 
-    let btn = document.createElement('button');
+    btn = document.createElement('input');
     imagesDiv.appendChild(btn);
     btn.textContent='View Results';
     btn.addEventListener('click',results);
-    // btn.setAttribute ("type", "submit");
-    // btn.setAttribute ("value", "View Results");
-    // btn.id = "done"
+    btn.setAttribute ("type", "submit");
+    btn.setAttribute ("value", "View Results");
+    btn.id = "done"
 
 
 
@@ -126,13 +131,12 @@ function userClick(event) {
     imagesDiv.removeEventListener('click',userClick);
 
 
+
   }}
 
+let btn;
 
 function results(){
-
-
-
 
 
   let list= document.getElementById('results-list');
@@ -143,13 +147,16 @@ function results(){
 
     list.appendChild(listItem);
 
-    listItem.textContent=`${Item.all[i].name} has ${Item.all[i].votes}  votes  and showing ${Item.all[i].shown}`;
-
-  }}
+    listItem.textContent=`${Item.all[i].name} had ${Item.all[i].votes}  votes,  and was seen ${Item.all[i].shown} times`;
 
 
+  }
+  
+  document.getElementById("done").disabled=true;
+  // btn.removeEventListener('click',results);
+ 
+}
 
-  imagesDiv.removeEventListener('click',results);
 
 
 
