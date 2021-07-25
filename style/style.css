@@ -1,0 +1,30 @@
+#main-div{
+display: inline;
+
+
+
+
+}
+.img{
+
+
+    width: 500px;
+    margin: 50px;
+    border: black solid 5px;
+}
+p{
+
+    text-align: center;
+    font-size: 40px;
+}
+li{
+
+    font-size: 30px;
+
+}
+input{
+
+    width: 500px;
+    font-size: 30px;
+
+}
