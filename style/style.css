@@ -1,21 +1,21 @@
 #main-div{
 display: inline;
 
-
+b
 
 
 }
 .img{
 
 
-    width: 500px;
+    width: 350px;
     margin: 50px;
     border: black solid 5px;
 }
 p{
 
     text-align: center;
-    font-size: 40px;
+    font-size: 30px;
 }
 li{
 
