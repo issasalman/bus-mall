@@ -1,7 +1,15 @@
+body{
+
+
+    margin: 10px 70px ;
+}
+
 #main-div{
 display: inline;
+margin: 10px 70px;
+padding: 10px 50px;
 
-b
+
 
 
 }
@@ -20,7 +28,7 @@ p{
 }
 li{
 
-    font-size: 30px;
+    font-size: 20px;
 
 }
 input{
