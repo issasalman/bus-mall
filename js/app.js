@@ -182,19 +182,7 @@ function results(){
 
 
 
-
-
-
-
-
 console.log(votesArr);
-
-
-
-
-
-
-
 
 
 // console.log(namesArr);
