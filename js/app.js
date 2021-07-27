@@ -6,82 +6,84 @@ function getRandomIndex() {
 
 }
 
-let maxTries=25;
-let userCounter=0;
+let maxTries = 25;
+let userCounter = 0;
 
 let leftImageIndex;
 let middleImageIndex;
 let rightImageIndex;
 
+// getStorage();
 
 
 // this.src= `images/${name}`;
 
-function Item(name,src) {
-  this.name= name;
-  this.src= src;
-  this.votes=0;
-  this.shown=0;
+function Item(name, src) {
+  this.name = name;
+  this.src = src;
+  this.votes = 0;
+  this.shown = 0;
+
+
 
   Item.all.push(this);
   namesArr.push(this.name);
 }
-Item.all=[];
+Item.all = [];
 
 let namesArr = [];
 
 let votesArr = [];
 
-let shownArr=[];
-let numbers=[];
+let shownArr = [];
+let numbers = [];
 
-new Item('bag.jpg','images/bag.jpg');
-new Item('banana.jpg','images/banana.jpg');
-new Item('bathroom.jpg','images/bathroom.jpg');
-new Item('boots.jpg','images/boots.jpg');
-new Item('breakfast.jpg','images/breakfast.jpg');
-new Item('bubblegum.jpg','images/bubblegum.jpg');
-new Item('chair.jpg','images/chair.jpg');
-new Item('cthulhu.jpg','images/cthulhu.jpg');
-new Item('dog-duck.jpg','images/dog-duck.jpg');
-new Item('dragon.jpg','images/dragon.jpg');
-new Item('pen.jpg','images/pen.jpg');
-new Item('pet-sweep.jpg','images/pet-sweep.jpg');
-new Item('scissors.jpg','images/scissors.jpg');
-new Item('shark.jpg','images/shark.jpg');
-new Item('sweep.png','images/sweep.png');
-new Item('tauntaun.jpg','images/tauntaun.jpg');
-new Item('unicorn.jpg','images/unicorn.jpg');
-new Item('water-can.jpg','images/water-can.jpg');
-new Item('wine-glass.jpg','images/wine-glass.jpg');
+new Item('bag.jpg', 'images/bag.jpg');
+new Item('banana.jpg', 'images/banana.jpg');
+new Item('bathroom.jpg', 'images/bathroom.jpg');
+new Item('boots.jpg', 'images/boots.jpg');
+new Item('breakfast.jpg', 'images/breakfast.jpg');
+new Item('bubblegum.jpg', 'images/bubblegum.jpg');
+new Item('chair.jpg', 'images/chair.jpg');
+new Item('cthulhu.jpg', 'images/cthulhu.jpg');
+new Item('dog-duck.jpg', 'images/dog-duck.jpg');
+new Item('dragon.jpg', 'images/dragon.jpg');
+new Item('pen.jpg', 'images/pen.jpg');
+new Item('pet-sweep.jpg', 'images/pet-sweep.jpg');
+new Item('scissors.jpg', 'images/scissors.jpg');
+new Item('shark.jpg', 'images/shark.jpg');
+new Item('sweep.png', 'images/sweep.png');
+new Item('tauntaun.jpg', 'images/tauntaun.jpg');
+new Item('unicorn.jpg', 'images/unicorn.jpg');
+new Item('water-can.jpg', 'images/water-can.jpg');
+new Item('wine-glass.jpg', 'images/wine-glass.jpg');
 
 
 
-let leftImageElement=document.getElementById('left-img');
-let middleImageElement=document.getElementById('middle-img');
-let rightImageElement=document.getElementById('right-img');
+let leftImageElement = document.getElementById('left-img');
+let middleImageElement = document.getElementById('middle-img');
+let rightImageElement = document.getElementById('right-img');
 
 
 
 function renderImages() {
 
-  leftImageIndex=getRandomIndex();
-  middleImageIndex=getRandomIndex();
-  rightImageIndex=getRandomIndex();
+  leftImageIndex = getRandomIndex();
+  middleImageIndex = getRandomIndex();
+  rightImageIndex = getRandomIndex();
 
-  while (leftImageIndex===rightImageIndex || leftImageIndex===middleImageIndex || rightImageIndex===middleImageIndex ||numbers.includes(leftImageIndex) ||numbers.includes(middleImageIndex) ||numbers.includes(rightImageIndex ) )
-  {
-    leftImageIndex=getRandomIndex();
-    middleImageIndex=getRandomIndex();
-    rightImageIndex=getRandomIndex();
+  while (leftImageIndex === rightImageIndex || leftImageIndex === middleImageIndex || rightImageIndex === middleImageIndex || numbers.includes(leftImageIndex) || numbers.includes(middleImageIndex) || numbers.includes(rightImageIndex)) {
+    leftImageIndex = getRandomIndex();
+    middleImageIndex = getRandomIndex();
+    rightImageIndex = getRandomIndex();
 
   }
 
-  numbers=[leftImageIndex,rightImageIndex,middleImageIndex];
+  numbers = [leftImageIndex, rightImageIndex, middleImageIndex];
 
-  leftImageElement.src=Item.all[leftImageIndex].src;
-  middleImageElement.src=Item.all[middleImageIndex].src;
-  rightImageElement.src=Item.all[rightImageIndex].src;
+  leftImageElement.src = Item.all[leftImageIndex].src;
+  middleImageElement.src = Item.all[middleImageIndex].src;
+  rightImageElement.src = Item.all[rightImageIndex].src;
   Item.all[leftImageIndex].shown++;
   Item.all[middleImageIndex].shown++;
   Item.all[rightImageIndex].shown++;
@@ -89,31 +91,30 @@ function renderImages() {
 
 renderImages();
 
-let imagesDiv=document.getElementById('main-div');
-imagesDiv.addEventListener('click',userClick);
+let imagesDiv = document.getElementById('main-div');
+imagesDiv.addEventListener('click', userClick);
 
 function userClick(event) {
 
-  if (userCounter<maxTries) {
+  if (userCounter < maxTries) {
+    
 
-
-    if (event.target.id==='left-img') {
+    if (event.target.id === 'left-img') {
 
       Item.all[leftImageIndex].votes++;
       userCounter++;
 
     }
-    else if(event.target.id==='right-img')
-    {
+    else if (event.target.id === 'right-img') {
       userCounter++;
       Item.all[rightImageIndex].votes++;
     }
 
-    else if(event.target.id==='middle-img'){
+    else if (event.target.id === 'middle-img') {
       Item.all[middleImageIndex].votes++;
       userCounter++;
     }
-    else{
+    else {
       alert('Please click on imgs');
 
 
@@ -122,11 +123,11 @@ function userClick(event) {
 
     renderImages();
 
-  }else{
+  } else {
+   
 
-
-
-
+    updateStorage();
+    // getStorage()
 
     for (let i = 0; i < Item.all.length; i++) {
       console.log(Item.all[i].votes);
@@ -138,36 +139,39 @@ function userClick(event) {
 
     btn = document.createElement('input');
     imagesDiv.appendChild(btn);
-    btn.textContent='View Results';
-    btn.addEventListener('click',results);
-    btn.setAttribute ('type', 'submit');
-    btn.setAttribute ('value', 'View Results');
+    btn.textContent = 'View Results';
+    btn.addEventListener('click', results);
+    btn.setAttribute('type', 'submit');
+    btn.setAttribute('value', 'View Results');
     btn.id = 'done';
 
     // remove event listener:
-    imagesDiv.removeEventListener('click',userClick);
-
-  }}
+    imagesDiv.removeEventListener('click', userClick);
+   
+  }
+ 
+  
+}
 
 let btn;
 
-function results(){
+function results() {
 
 
-  let list= document.getElementById('results-list');
+  let list = document.getElementById('results-list');
 
   for (let i = 0; i < Item.all.length; i++) {
 
-    let listItem=document.createElement('li');
+    let listItem = document.createElement('li');
 
     list.appendChild(listItem);
 
-    listItem.textContent=`${Item.all[i].name} had ${Item.all[i].votes}  votes,  and was seen ${Item.all[i].shown} times`;
+    listItem.textContent = `${Item.all[i].name} had ${Item.all[i].votes}  votes,  and was seen ${Item.all[i].shown} times`;
 
 
   }
-
-  document.getElementById('done').disabled=1;
+ 
+  document.getElementById('done').disabled = 1;
 
   // btn.removeEventListener('click',results);
 
@@ -177,7 +181,7 @@ function results(){
     shownArr.push(Item.all[i].shown);
 
   }
-
+ 
 }
 
 
@@ -187,6 +191,54 @@ console.log(votesArr);
 
 // console.log(namesArr);
 // console.log(votesArr);
+
+
+function updateStorage() {
+
+  // console.log(Coffee.drinks.toString());
+  console.log(Item.all);
+
+  let stringArr = JSON.stringify(Item.all);
+  console.log(stringArr);
+
+  localStorage.setItem('Votes', stringArr);
+
+
+}
+function getStorage() {
+  // get data from local storage
+  let data = localStorage.getItem('votes');
+  console.log(data);
+
+  data.push(parsedArr.votes);
+  // convert the string array into a normal one:
+  let parsedArr = JSON.parse(data);
+  console.log(parsedArr);
+
+  // if the first time comiong to the page, make sure there will be data in the storage and then make it equal to the Coffee.drinks
+  if (parsedArr !== null) {
+    // YOU can either do this But it wont have the prototype methods
+
+    // Coffee.drinks=parsedArr;
+
+    // for (let i = 0; i < parsedArr.length; i++) {
+    //  parsedArr[i].drinking();
+    // }
+    // OR YOU DO reinstantiation TO HAVE THE PROTOTYPE AGAIN
+    // reinstantiation
+    // for (let i = 0; i < parsedArr.length; i++) {
+    //   console.log(parsedArr[i]);
+    //   // name, src
+    //  let  newItem= new Item(parsedArr[i].name, parsedArr[i].src);
+
+    //   // new Item(parsedArr[i].name)
+    // }
+    // console.log(Item.all);
+
+  }
+}
+
+getStorage();
 
 
 function showChart() {
@@ -204,7 +256,7 @@ function showChart() {
         'rgba(54, 162, 235, 0.7)',
         'rgba(153, 102, 255, 0.7)',
         'rgba(201, 203, 207, 0.7)',
-        
+
       ],
       borderColor: [
         'rgb(255, 99, 132)',
@@ -214,7 +266,7 @@ function showChart() {
         'rgb(54, 162, 235)',
         'rgb(153, 102, 255)',
         'rgb(201, 203, 207)',
-        
+
       ],
       borderWidth: 4
     },
@@ -264,3 +316,5 @@ function showChart() {
   );
 
 }
+
+
