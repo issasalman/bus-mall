@@ -124,17 +124,19 @@ function userClick(event) {
     renderImages();
 
   } else {
-   
+
+    imagesDiv.removeEventListener('click', userClick);
 
     updateStorage();
     // getStorage()
 
     for (let i = 0; i < Item.all.length; i++) {
-      console.log(Item.all[i].votes);
+      // console.log(Item.all[i].votes);
       votesArr.push(Item.all[i].votes);
       shownArr.push(Item.all[i].shown);
 
     }
+    
     showChart();
 
     btn = document.createElement('input');
@@ -146,7 +148,7 @@ function userClick(event) {
     btn.id = 'done';
 
     // remove event listener:
-    imagesDiv.removeEventListener('click', userClick);
+    
    
   }
  
@@ -186,7 +188,7 @@ function results() {
 
 
 
-console.log(votesArr);
+// console.log(votesArr);
 
 
 // console.log(namesArr);
@@ -196,21 +198,19 @@ console.log(votesArr);
 function updateStorage() {
 
   // console.log(Coffee.drinks.toString());
-  console.log(Item.all);
+  // console.log(Item.all);
 
   let stringArr = JSON.stringify(Item.all);
-  console.log(stringArr);
+  // console.log(stringArr);
 
-  localStorage.setItem('Votes', stringArr);
-
+  localStorage.setItem('votes', stringArr);
 
 }
 function getStorage() {
   // get data from local storage
   let data = localStorage.getItem('votes');
-  console.log(data);
+  // console.log(data);
 
-  data.push(parsedArr.votes);
   // convert the string array into a normal one:
   let parsedArr = JSON.parse(data);
   console.log(parsedArr);
@@ -218,24 +218,28 @@ function getStorage() {
   // if the first time comiong to the page, make sure there will be data in the storage and then make it equal to the Coffee.drinks
   if (parsedArr !== null) {
     // YOU can either do this But it wont have the prototype methods
-
+Item.all=parsedArr;
     // Coffee.drinks=parsedArr;
 
     // for (let i = 0; i < parsedArr.length; i++) {
     //  parsedArr[i].drinking();
     // }
-    // OR YOU DO reinstantiation TO HAVE THE PROTOTYPE AGAIN
-    // reinstantiation
+
+
+  //   // OR YOU DO reinstantiation TO HAVE THE PROTOTYPE AGAIN
+  //   // reinstantiation
     // for (let i = 0; i < parsedArr.length; i++) {
     //   console.log(parsedArr[i]);
     //   // name, src
-    //  let  newItem= new Item(parsedArr[i].name, parsedArr[i].src);
-
+    //   new Item(parsedArr[i].name, parsedArr[i].src);
+ 
     //   // new Item(parsedArr[i].name)
     // }
-    // console.log(Item.all);
+  //   console.log(Item.all);
 
   }
+
+
 }
 
 getStorage();
